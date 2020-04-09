@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Apr  9 08:58:40 2020
+
+@author: ericzheng
+"""
+from functools import wraps
+def decorate2(f):
+    @wraps(f)
+    def wrap_function(*args, **kwargs):
+        str2 = 'Hello2!'
+        print('decorate1')
+        return f(str2=str2, *args, **kwargs)
+    return wrap_function
+
+def decorate1(f):
+    wraps(f)
+    def wrap_function(*args, **kwargs):
+        str1 = 'Hello1!'
+        return f(str1=str1, *args, **kwargs)
+    return wrap_function
+
+@decorate2
+@decorate1
+def print_message(str1, str2):
+    print(str1)
+    print(str2)
+    
+    
+if __name__=='__main__':
+    a=0
+    print_message() 
